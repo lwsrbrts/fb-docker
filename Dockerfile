@@ -2,6 +2,7 @@ FROM php:7.0-apache
 
 COPY apache2.conf /bin/
 COPY init_container.sh /bin/
+COPY docker-php.conf /bin/
 COPY hostingstart.html /home/site/wwwroot/hostingstart.html
 
 RUN a2enmod rewrite expires include deflate headers dir
@@ -61,6 +62,7 @@ RUN   \
    && chmod 777 /var/lock \
    && chmod 777 /bin/init_container.sh \
    && cp /bin/apache2.conf /etc/apache2/apache2.conf \
+   && cp /bin/docker-php.conf /etc/apache2/conf-enabled/docker-php.conf \
    && rm -rf /var/www/html \ 
    && rm -rf /var/log/apache2 \
    && mkdir -p /home/LogFiles \
